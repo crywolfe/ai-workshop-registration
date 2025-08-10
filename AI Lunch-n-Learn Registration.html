@@ -1,0 +1,173 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lunch-n-Learn Workshop Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'intificia-blue': '#003087',
+                        'intificia-orange': '#F7931E',
+                        'intificia-gray': '#333333',
+                        'intificia-light-gray': '#F5F6F5',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-intificia-light-gray font-poppins">
+    <header class="bg-intificia-blue text-white py-6">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h1 class="text-3xl font-bold">AI Lunch-n-Learn Workshop</h1>
+            <p class="text-lg mt-2">Bismarck Chamber of Commerce</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <section class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-intificia-blue mb-4">"AI Is More Than Advanced Google Search"</h2>
+            <p class="text-intificia-gray mb-4">
+                Join us for a free 35-minute Lunch-n-Learn workshop led by AI Consultant Gerry Wolfe from <a href="https://intificia.com" target="_blank" class="text-intificia-blue hover:text-intificia-orange transition">Intificia.com</a>. Discover how artificial intelligence can transform your business operations beyond simple web searches.
+            </p>
+            <p class="text-intificia-gray mb-4">
+                <strong>Date & Time:</strong> To be announced<br>
+                <strong>Location:</strong> Bismarck Chamber of Commerce (Room TBD)<br>
+                <strong>Duration:</strong> 35 minutes<br>
+                <strong>Cost:</strong> Free<br>
+                <strong>What to Bring:</strong> Lunch and a notebook
+            </p>
+            <p class="text-intificia-gray">
+                This workshop is strictly educational with no sales pitches. Learn practical, actionable ways to implement AI tools safely and effectively in your business.
+            </p>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-intificia-blue mb-4">Register Now</h2>
+            <p class="text-intificia-gray mb-4">Space is limited. Please fill out the form below to secure your spot.</p>
+            <form id="registration-form" action="YOUR_APPS_SCRIPT_URL" method="POST" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-intificia-gray">Full Name</label>
+                    <input type="text" id="name" name="Name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-blue focus:ring focus:ring-intificia-blue focus:ring-opacity-50 text-intificia-gray" placeholder="Your name">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-intificia-gray">Email Address</label>
+                    <input type="email" id="email" name="Email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-blue focus:ring focus:ring-intificia-blue focus:ring-opacity-50 text-intificia-gray" placeholder="your.email@example.com">
+                </div>
+                <div>
+                    <label for="business" class="block text-sm font-medium text-intificia-gray">Business Name (Optional)</label>
+                    <input type="text" id="business" name="Business" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-blue focus:ring focus:ring-intificia-blue focus:ring-opacity-50 text-intificia-gray" placeholder="Your business name">
+                </div>
+                <div>
+                    <label for="interests" class="block text-sm font-medium text-intificia-gray">What AI topics are you interested in?</label>
+                    <textarea id="interests" name="Interests" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-blue focus:ring focus:ring-intificia-blue focus:ring-opacity-50 text-intificia-gray" placeholder="e.g., AI for marketing, customer service automation"></textarea>
+                </div>
+                <button type="submit" class="bg-intificia-blue text-white px-4 py-2 rounded-md hover:bg-intificia-orange transition focus:outline-none focus:ring focus:ring-intificia-blue focus:ring-opacity-50">Register</button>
+            </form>
+            <p id="form-message" class="mt-4 text-intificia-gray"></p>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-semibold text-intificia-blue mb-4">About the Workshop</h2>
+            <p class="text-intificia-gray mb-4">
+                Led by Gerry Wolfe, AI Consultant at <a href="https://intificia.com" target="_blank" class="text-intificia-blue hover:text-intificia-orange transition">Intificia.com</a>, this workshop series is designed for Bismarck business owners and professionals. Gerry brings nine years of software engineering experience, a Master's degree in Computer Science with a focus on machine learning, and expertise in building generative AI products.
+            </p>
+            <p class="text-intificia-gray mb-4">
+                <strong>What You'll Learn:</strong>
+            </p>
+            <ul class="list-disc list-inside text-intificia-gray mb-4">
+                <li>AI capabilities beyond search functions</li>
+                <li>Real-world AI applications for various business types</li>
+                <li>Safe and practical ways to start using AI tools</li>
+                <li>Interactive discussion to shape future sessions</li>
+            </ul>
+            <p class="text-intificia-gray">
+                Future workshops will be tailored based on your feedback, covering topics like AI for marketing, customer service automation, data analysis, and workflow optimization.
+            </p>
+        </section>
+    </main>
+
+    <footer class="bg-intificia-blue text-white py-6">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <p>Contact: Gerry Wolfe, AI Consultant, Intificia.com | <a href="mailto:gwolfe@intificia.com" class="hover:text-intificia-orange transition">gwolfe@intificia.com</a></p>
+            <p>Connect: <a href="https://linkedin.com/in/gerrywolfe" target="_blank" class="hover:text-intificia-orange transition">linkedin.com/in/gerrywolfe</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const messageElement = document.getElementById('form-message');
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    messageElement.textContent = `Thank you, ${formData.get('Name')}! Your registration has been submitted. We'll send confirmation details to ${formData.get('Email')} soon.`;
+                    messageElement.classList.add('text-green-600');
+                    form.reset();
+                } else {
+                    messageElement.textContent = 'Error submitting the form. Please try again.';
+                    messageElement.classList.add('text-red-600');
+                }
+            })
+            .catch(error => {
+                messageElement.textContent = 'Error submitting the form. Please try again.';
+                messageElement.classList.add('text-red-600');
+            });
+        });
+    </script>
+</body>
+</html>
