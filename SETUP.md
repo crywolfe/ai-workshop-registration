@@ -64,7 +64,8 @@ This part puts your registration form on the web.
    - In the left sidebar, click on **Pages**.
    - Under "Build and deployment," for the "Source," select **Deploy from a branch**.
    - For the "Branch," select `main` (or `master`) and `/ (root)` for the folder, then click **Save**.
-   - GitHub will generate a URL for your live site (e.g., `https://your-username.github.io/ai-workshop-registration/`). It may take a few minutes to become active.
+     > **Note:** If the `Save` button is disabled, it means the settings are already correct and have been saved previously. The message "Your GitHub Pages site is currently being built from the main branch" confirms this.
+   - GitHub will generate a URL for your live site at the top of the page (e.g., `https://your-username.github.io/ai-workshop-registration/`). It may take a few minutes for the site to become active after the initial setup.
 
 ## Part 3: Testing
 
