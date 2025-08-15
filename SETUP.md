@@ -82,3 +82,27 @@ This part puts your registration form on the web.
    - **Calendar Invite:** Open the email and ensure the `.ics` file is attached. Click on it to see if it correctly adds the event to your calendar (Google Calendar, Outlook, Apple Calendar).
 
 Your registration system is now fully operational.
+
+## Part 4: Setting Up Automated Reminder Emails
+
+This is an optional but recommended step to automatically send reminder emails to your attendees 10 days and 3 days before the event.
+
+**1. Add Reminder Columns to Your Google Sheet:**
+   - Open your `AI Lunch-n-Learn Registrations` Google Sheet.
+   - Add two new headers in the next available columns:
+     - `F1`: `10DayReminderSent`
+     - `G1`: `3DayReminderSent`
+   - The script will use these columns to track which reminders have been sent to prevent duplicates.
+
+**2. Create the Time-Driven Trigger:**
+   - In the Google Apps Script editor for your project, click on the **Triggers** icon in the left sidebar (it looks like a clock).
+   - Click the **+ Add Trigger** button in the bottom-right.
+   - Configure the trigger with the following settings:
+     - **Choose which function to run:** `sendAutomatedReminders`
+     - **Choose which deployment should run:** `Head`
+     - **Select event source:** `Time-driven`
+     - **Select type of time-based trigger:** `Day timer`
+     - **Select time of day:** `8am - 9am` (or any time you prefer for the daily check).
+   - Click **Save**.
+
+Your automated reminder system is now active. The `sendAutomatedReminders` function will run once every day. If it determines that it's 10 or 3 days before the event, it will automatically send the appropriate reminder emails to all registered users who haven't yet received one.

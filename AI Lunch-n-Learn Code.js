@@ -42,6 +42,10 @@ function doPost(e) {
       if (header === 'Date') {
         return new Date();
       }
+      // Leave reminder status columns blank on new registration
+      if (header === '10DayReminderSent' || header === '3DayReminderSent') {
+        return '';
+      }
       return e.parameter[header] || ''; // Use empty string for missing optional fields
     });
 
@@ -53,7 +57,7 @@ function doPost(e) {
 
     const eventDetails = {
       title: 'AI Lunch-n-Learn: AI Is More Than Advanced Google Search',
-      start: new Date('2025-12-10T12:00:00-06:00'), // CDT is UTC-5, but to be safe using UTC-6 for CST
+      start: new Date('2025-12-10T12:00:00-06:00'), // Central Time
       end: new Date('2025-12-10T12:35:00-06:00'),
       location: 'Bismarck Chamber of Commerce (Room TBD)',
       description: 'Join Gerry Wolfe from Intificia.com for a 35-minute workshop to learn practical AI applications for your business. Bring your lunch and a notebook! Contact: gwolfe@intificia.com',
@@ -146,4 +150,94 @@ function createIcsContent(eventDetails) {
     'END:VEVENT',
     'END:VCALENDAR'
   ].join('\r\n');
+}
+
+/**
+ * This function is designed to be run daily by a time-driven trigger.
+ * It sends reminder emails 10 days and 3 days before the event.
+ * It checks for status columns to avoid sending duplicate reminders.
+ */
+function sendAutomatedReminders() {
+  const sheetName = 'AI Lunch-n-Learn Registrations';
+  const scriptProp = PropertiesService.getScriptProperties();
+  
+  const spreadsheetId = scriptProp.getProperty('key');
+  if (!spreadsheetId) {
+    console.error('Spreadsheet ID not found. Run initialSetup().');
+    return;
+  }
+  
+  const doc = SpreadsheetApp.openById(spreadsheetId);
+  const sheet = doc.getSheetByName(sheetName);
+  if (!sheet) {
+    console.error(`Sheet "${sheetName}" not found.`);
+    return;
+  }
+
+  // --- Configuration ---
+  const eventDate = new Date('2025-12-10T12:00:00-06:00'); // Central Time
+  const eventName = 'AI Is More Than Advanced Google Search';
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const timeUntilEvent = eventDate.getTime() - today.getTime();
+  const daysUntilEvent = Math.ceil(timeUntilEvent / (1000 * 60 * 60 * 24));
+
+  let reminderType = null;
+  let reminderSubject = '';
+  let reminderMessage = '';
+  let statusColumnIndex = -1;
+
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  
+  // --- Determine if Today is a Reminder Day ---
+  if (daysUntilEvent === 10) {
+    reminderType = '10Day';
+    statusColumnIndex = headers.indexOf('10DayReminderSent');
+    reminderSubject = `Reminder: The ${eventName} workshop is in 10 Days!`;
+    reminderMessage = `Hello [Name],\n\nThis is a friendly reminder that the "${eventName}" workshop you registered for is just 10 days away.\n\n- Date: December 10, 2025\n- Time: 12:00 PM (CDT)\n- Location: Bismarck Chamber of Commerce\n\nWe look forward to seeing you there!\n\nBest,\nGerry Wolfe`;
+  } else if (daysUntilEvent === 3) {
+    reminderType = '3Day';
+    statusColumnIndex = headers.indexOf('3DayReminderSent');
+    reminderSubject = `Final Reminder: The ${eventName} workshop is in 3 Days!`;
+    reminderMessage = `Hello [Name],\n\nThis is your final reminder for the "${eventName}" workshop. The event is just 3 days away!\n\n- Date: December 10, 2025\n- Time: 12:00 PM (CDT)\n- Location: Bismarck Chamber of Commerce\n- What to Bring: Your lunch and a notebook.\n\nWe're excited to share valuable AI insights with you. See you soon!\n\nBest,\nGerry Wolfe`;
+  } else {
+    console.log(`Not a reminder day. Days until event: ${daysUntilEvent}`);
+    return; // Exit if it's not a reminder day
+  }
+
+  if (statusColumnIndex === -1) {
+      console.error(`Status column for ${reminderType} reminder not found. Please add '10DayReminderSent' and '3DayReminderSent' headers to your sheet.`);
+      return;
+  }
+
+  // --- Send Emails ---
+  const dataRange = sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn());
+  const data = dataRange.getValues();
+  
+  const nameColumnIndex = headers.indexOf('Name');
+  const emailColumnIndex = headers.indexOf('Email');
+
+  let emailsSent = 0;
+  for (let i = 0; i < data.length; i++) {
+    const row = data[i];
+    const name = row[nameColumnIndex];
+    const email = row[emailColumnIndex];
+    const reminderStatus = row[statusColumnIndex];
+
+    // Send only if email exists, quota is available, and reminder hasn't been sent
+    if (email && !reminderStatus && MailApp.getRemainingDailyQuota() > 0) {
+      const personalizedMessage = reminderMessage.replace('[Name]', name);
+      MailApp.sendEmail(email, reminderSubject, personalizedMessage);
+      // Update the status in the sheet to avoid re-sending
+      sheet.getRange(i + 2, statusColumnIndex + 1).setValue('SENT');
+      emailsSent++;
+    }
+  }
+  
+  if (emailsSent > 0) {
+    console.log(`Sent ${emailsSent} reminder emails for the ${reminderType} reminder.`);
+  } else {
+    console.log(`No new ${reminderType} reminders to send today.`);
+  }
 }
