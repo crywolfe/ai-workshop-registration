@@ -52,9 +52,9 @@ function doPost(e) {
     const userEmail = e.parameter['Email'];
 
     const eventDetails = {
-      title: 'AI Lunch-n-Learn: AI Is More Than Advanced Google Search',
-      start: new Date('2025-12-10T12:00:00-06:00'), // CDT is UTC-5, but to be safe using UTC-6 for CST
-      end: new Date('2025-12-10T12:35:00-06:00'),
+      title: "Unlocking AI: It's More Than Just Advanced Search – Practical Tools for Your Business",
+      start: new Date('2025-10-15T12:00:00-06:00'), // CDT is UTC-5, but to be safe using UTC-6 for CST
+      end: new Date('2025-10-15T12:35:00-06:00'),
       location: 'Bismarck Chamber of Commerce (Room TBD)',
       description: 'Join Gerry Wolfe from Intificia.com for a 35-minute workshop to learn practical AI applications for your business. Bring your lunch and a notebook! Contact: gwolfe@intificia.com',
       organizer: { name: 'Gerry Wolfe', email: 'gwolfe@intificia.com' }
@@ -210,7 +210,7 @@ function sendAutomatedReminders() {
   }
 
   if (statusColumnIndex === -1) {
-      console.error(`Status column for ${reminderType} reminder not found. Please add '10DayReminderSent' and '3DayReminderSent' headers to your sheet.`);
+      console.error(`Status column for ${reminderType} reminder not found. Please add '10DayReminderSent', '3DayReminderSent', '0DayReminderSent' headers to your sheet.`);
       return;
   }
 
