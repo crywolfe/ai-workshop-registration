@@ -55,7 +55,7 @@ function doPost(e) {
       title: "Unlocking AI: It's More Than Just Advanced Search – Practical Tools for Your Business",
       start: new Date('2025-10-15T12:00:00-05:00'), // CDT is UTC-5
       end: new Date('2025-10-15T12:35:00-05:00'),
-      location: 'Bismarck Chamber of Commerce (Room TBD)',
+      location: 'Bismarck Chamber of Commerce (Mandan Room)',
       description: 'Join Gerry Wolfe from Intificia.com for a 35-minute workshop to learn practical AI applications for your business. Bring your lunch and a notebook! Contact: gwolfe@intificia.com',
       organizer: { name: 'Gerry Wolfe', email: 'gwolfe@intificia.com' }
     };
