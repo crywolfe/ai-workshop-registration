@@ -42,10 +42,6 @@ function doPost(e) {
       if (header === 'Date') {
         return new Date();
       }
-      // Leave reminder status columns blank on new registration
-      if (header === '10DayReminderSent' || header === '3DayReminderSent') {
-        return '';
-      }
       return e.parameter[header] || ''; // Use empty string for missing optional fields
     });
 
@@ -57,7 +53,7 @@ function doPost(e) {
 
     const eventDetails = {
       title: 'AI Lunch-n-Learn: AI Is More Than Advanced Google Search',
-      start: new Date('2025-12-10T12:00:00-06:00'), // Central Time
+      start: new Date('2025-12-10T12:00:00-06:00'), // CDT is UTC-5, but to be safe using UTC-6 for CST
       end: new Date('2025-12-10T12:35:00-06:00'),
       location: 'Bismarck Chamber of Commerce (Room TBD)',
       description: 'Join Gerry Wolfe from Intificia.com for a 35-minute workshop to learn practical AI applications for your business. Bring your lunch and a notebook! Contact: gwolfe@intificia.com',
@@ -103,7 +99,7 @@ We have reserved your spot. Here are the event details:
 
 An iCalendar (.ics) file is attached to this email. Please open it to add the event directly to your calendar.
 
-We look forward to seeing you there!
+Bring your ideas and questions. We look forward to seeing you there!
 
 Best regards,
 
@@ -152,6 +148,7 @@ function createIcsContent(eventDetails) {
   ].join('\r\n');
 }
 
+
 /**
  * This function is designed to be run daily by a time-driven trigger.
  * It sends reminder emails 10 days and 3 days before the event.
@@ -175,8 +172,8 @@ function sendAutomatedReminders() {
   }
 
   // --- Configuration ---
-  const eventDate = new Date('2025-12-10T12:00:00-06:00'); // Central Time
-  const eventName = 'AI Is More Than Advanced Google Search';
+  const eventDate = new Date('2025-10-15T12:00:00-06:00'); // Central Time
+  const eventName = "Unlocking AI: It's More Than Just Advanced Search – Practical Tools for Your Business";
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -195,12 +192,18 @@ function sendAutomatedReminders() {
     reminderType = '10Day';
     statusColumnIndex = headers.indexOf('10DayReminderSent');
     reminderSubject = `Reminder: The ${eventName} workshop is in 10 Days!`;
-    reminderMessage = `Hello [Name],\n\nThis is a friendly reminder that the "${eventName}" workshop you registered for is just 10 days away.\n\n- Date: December 10, 2025\n- Time: 12:00 PM (CDT)\n- Location: Bismarck Chamber of Commerce\n\nWe look forward to seeing you there!\n\nBest,\nGerry Wolfe`;
+    reminderMessage = `Hello [Name],\n\nThis is a friendly reminder that the "${eventName}" workshop you registered for is just 10 days away.\n\n- Date: ${eventDate}\n- Time: 12:00 PM (CDT)\n- Location: Bismarck Chamber of Commerce\n\nWe look forward to seeing you there!\n\nBest,\nGerry Wolfe`;
   } else if (daysUntilEvent === 3) {
     reminderType = '3Day';
     statusColumnIndex = headers.indexOf('3DayReminderSent');
-    reminderSubject = `Final Reminder: The ${eventName} workshop is in 3 Days!`;
-    reminderMessage = `Hello [Name],\n\nThis is your final reminder for the "${eventName}" workshop. The event is just 3 days away!\n\n- Date: December 10, 2025\n- Time: 12:00 PM (CDT)\n- Location: Bismarck Chamber of Commerce\n- What to Bring: Your lunch and a notebook.\n\nWe're excited to share valuable AI insights with you. See you soon!\n\nBest,\nGerry Wolfe`;
+    reminderSubject = `Getting Close Reminder: The ${eventName} workshop is in 3 Days!`;
+    reminderMessage = `Hello [Name],\n\nThis is a friendly reminder for the "${eventName}" workshop. The event is just 3 days away!\n\n- Date: ${eventDate}\n- Time: 12:00 PM (CDT)\n- Location: Bismarck Chamber of Commerce\n- What to Bring: Your lunch and a notebook.\n\nWe're excited to share valuable AI insights with you. See you soon!\n\nBest,\nGerry Wolfe`;
+  }
+    else if (daysUntilEvent === 0) {
+    reminderType = '0Day';
+    statusColumnIndex = headers.indexOf('0DayReminderSent');
+    reminderSubject = `Today's Reminder: The ${eventName} workshop is Today!`;
+    reminderMessage = `Hello [Name],\n\nThis is your friendly reminder for the "${eventName}" workshop. The event is today!\n\n- Date: ${eventDate}\n- Time: 12:00 PM (CDT)\n- Location: Bismarck Chamber of Commerce\n- What to Bring: Your lunch and a notebook.\n\nWe're excited to share valuable AI insights with you. See you soon!\n\nBest,\nGerry Wolfe`;
   } else {
     console.log(`Not a reminder day. Days until event: ${daysUntilEvent}`);
     return; // Exit if it's not a reminder day
