@@ -172,7 +172,7 @@ function sendAutomatedReminders() {
   }
 
   // --- Configuration ---
-  const eventDate = new Date('2025-10-15T12:00:00-06:00'); // Central Time
+  const eventDate = new Date('2025-10-15T12:00:00-05:00'); // Central Time
   const eventName = "Unlocking AI: It's More Than Just Advanced Search – Practical Tools for Your Business";
   const today = new Date();
   today.setHours(0, 0, 0, 0);
