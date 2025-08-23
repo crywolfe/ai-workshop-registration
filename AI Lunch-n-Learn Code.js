@@ -53,8 +53,8 @@ function doPost(e) {
 
     const eventDetails = {
       title: "Unlocking AI: It's More Than Just Advanced Search – Practical Tools for Your Business",
-      start: new Date('2025-10-15T12:00:00-06:00'), // CDT is UTC-5, but to be safe using UTC-6 for CST
-      end: new Date('2025-10-15T12:35:00-06:00'),
+      start: new Date('2025-10-15T12:00:00-05:00'), // CDT is UTC-5
+      end: new Date('2025-10-15T12:35:00-05:00'),
       location: 'Bismarck Chamber of Commerce (Room TBD)',
       description: 'Join Gerry Wolfe from Intificia.com for a 35-minute workshop to learn practical AI applications for your business. Bring your lunch and a notebook! Contact: gwolfe@intificia.com',
       organizer: { name: 'Gerry Wolfe', email: 'gwolfe@intificia.com' }
