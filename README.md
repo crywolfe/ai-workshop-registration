@@ -1,6 +1,23 @@
 # AI Lunch-n-Learn Workshop Registration System
 
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)]()
+
 A complete workshop registration system for AI educational events, featuring a responsive web form and automated backend processing with Google Apps Script.
+
+## 📋 Table of Contents
+
+- [🚀 Overview](#-overview)
+- [✨ Features](#-features)
+- [🛠️ Technology Stack](#%EF%B8%8F-technology-stack)
+- [📁 Project Structure](#-project-structure)
+- [🚀 Quick Start](#-quick-start)
+- [🎨 Design System](#-design-system)
+- [🧪 Testing](#-testing)
+- [🚀 Deployment](#-deployment)
+- [📚 Documentation](#-documentation)
+- [🤝 Contributing](#-contributing)
+- [📞 Support](#-support)
 
 ## 🚀 Overview
 
@@ -44,132 +61,187 @@ intificia-lunch-n-learn/
 
 ## 🚀 Quick Start
 
+Get up and running in minutes with this streamlined setup process.
+
 ### Prerequisites
-- Google account with access to Google Sheets and Apps Script
-- GitHub account (for hosting)
-- Basic knowledge of HTML/CSS/JavaScript
+- ✅ Google account with Google Sheets and Apps Script access
+- ✅ GitHub account (for hosting)
+- ✅ Basic knowledge of HTML/CSS/JavaScript
 
-### Installation Steps
+### ⚡ 3-Step Setup
 
-1. **Clone or download this repository**
-2. **Follow the detailed setup guide in [SETUP.md](SETUP.md)**
-3. **Deploy to GitHub Pages for live hosting**
+1. **📥 Get the Code**
+   ```bash
+   git clone https://github.com/yourusername/intificia-lunch-n-learn.git
+   cd intificia-lunch-n-learn
+   ```
 
-### Local Development
-```bash
-# Open the HTML file in your browser
-open index.html  # macOS
-# or use a local server for better development experience
-```
+2. **🔧 Configure Backend**
+   - Follow the [detailed setup guide](SETUP.md) for Google Apps Script
+   - Set up Google Sheet with required columns
+   - Deploy web app and copy the URL
 
-## 📋 Setup Requirements
+3. **🚀 Deploy & Test**
+   ```bash
+   # For local development
+   open index.html  # macOS
+   # or use a local server
+   python -m http.server 8000
+   ```
 
-The system requires setup of:
-- Google Sheet with specific column headers
-- Google Apps Script with proper permissions
-- Web app deployment configuration
-- GitHub Pages hosting setup
-
-**For complete setup instructions, see [SETUP.md](SETUP.md)**
+### 🎯 Quick Links
+- **[📖 Complete Setup Guide](SETUP.md)** - Detailed configuration steps
+- **[🎨 Design Guidelines](CRUSH.md)** - Code style and best practices
+- **[🔧 Live Demo](https://yourusername.github.io/intificia-lunch-n-learn/)** - Test the registration form
 
 ## 🎨 Design System
 
-### Color Palette
-- **Primary**: `#1A3A3A` (Intificia Dark Blue)
-- **Accent**: `#2563eb` (Intificia Blue)
-- **Light Accent**: `#dbeafe` (Light Blue)
-- **Text**: `#222222` (Dark Gray)
-- **Background**: `#F8F9FA` (Light Gray)
-- **White**: `#ffffff` (Pure White)
+Built with modern web standards and Intificia's brand identity.
 
-### Typography
-- **Font Family**: Poppins (Google Fonts)
-- **Weights**: 400 (Regular), 600 (Semi-bold), 700 (Bold)
+| Element | Color | Hex Code |
+|---------|-------|----------|
+| **Primary** | Intificia Dark Blue | `#1A3A3A` |
+| **Accent** | Intificia Blue | `#2563eb` |
+| **Light Accent** | Light Blue | `#dbeafe` |
+| **Text** | Dark Gray | `#222222` |
+| **Background** | Light Gray | `#F8F9FA` |
 
-## 🔧 Configuration
+**Typography**: Poppins (Google Fonts) - Weights: 400, 600, 700
 
-### Form Fields
-- Full Name (required)
-- Email Address (required)
-- Business Name (optional)
-- AI Topics of Interest (optional)
+## ⚙️ System Configuration
 
-### Automated Features
-- **Confirmation Email**: Sent immediately upon registration
-- **Calendar Invite**: .ics file attachment
-- **10-Day Reminder**: Automated reminder email
-- **3-Day Reminder**: Final reminder email
-- **0-Day Reminder**: Same-day reminder email
+### 📝 Form Fields
+- **Full Name** (required)
+- **Email Address** (required)
+- **Business Name** (optional)
+- **AI Topics of Interest** (optional)
 
-## 📊 Data Management
+### 🤖 Automation Features
+- ✅ **Instant Confirmation**: Email with calendar invite (.ics)
+- ✅ **Smart Reminders**: 10-day, 3-day, and same-day notifications
+- ✅ **Duplicate Prevention**: Automatic duplicate registration handling
+- ✅ **Data Validation**: Client and server-side form validation
 
-Registrations are stored in Google Sheets with columns:
-- Date
-- Name
-- Email
-- Business
-- Interests
-- 10DayReminderSent
-- 3DayReminderSent
-- 0DayReminderSent
+### 📊 Data Storage
+Google Sheets integration with automated tracking:
+`Date | Name | Email | Business | Interests | ReminderStatus`
 
 ## 🧪 Testing
 
-### Form Testing
-1. Submit test registrations through the live form
-2. Verify data appears in Google Sheet
-3. Check confirmation emails are received
-4. Test calendar invite functionality
+Ensure everything works perfectly before going live.
 
-### Automated Systems
-- Monitor reminder email triggers (10-day, 3-day, and 0-day)
-- Verify email delivery and timing
-- Check duplicate prevention logic
+### ✅ Quick Test Checklist
+- [ ] **Form Submission**: Submit test registration and verify Google Sheet data
+- [ ] **Email Delivery**: Check confirmation email receipt and calendar invite
+- [ ] **Mobile Responsive**: Test form on different devices and screen sizes
+- [ ] **Validation**: Test required fields and email format validation
+
+### 🔄 Automated System Tests
+- [ ] **Reminder Triggers**: Monitor 10-day, 3-day, and same-day email timing
+- [ ] **Duplicate Prevention**: Test duplicate email handling
+- [ ] **Error Handling**: Verify graceful failure handling
+
+### 🐛 Troubleshooting
+Common issues and solutions available in [SETUP.md](SETUP.md#troubleshooting)
 
 ## 🚀 Deployment
 
-### GitHub Pages
-1. Create public repository
-2. Upload `index.html`
-3. Enable GitHub Pages from main branch
-4. Update form action URL with Apps Script web app URL
+Choose your preferred hosting method for production deployment.
 
-### Google Apps Script
-1. Deploy as web app
-2. Set access to "Anyone"
-3. Copy web app URL for form integration
+### 🌐 GitHub Pages (Recommended)
+```bash
+# 1. Create and push to GitHub repository
+git remote add origin https://github.com/yourusername/intificia-lunch-n-learn.git
+git push -u origin main
+
+# 2. Enable GitHub Pages
+# Go to Settings → Pages → Source: "main" → Save
+
+# 3. Update form action URL
+# Replace with your Google Apps Script web app URL
+```
+
+### ☁️ Other Hosting Options
+- **Netlify**: Drag & drop `index.html` for instant hosting
+- **Vercel**: Connect GitHub repo for automatic deployments
+- **Traditional Hosting**: Upload files via FTP
+
+### 🔧 Google Apps Script Setup
+1. **Deploy Web App**: Set execution access to "Anyone"
+2. **Copy URL**: Get the web app URL from deployment
+3. **Update Form**: Replace the action URL in `index.html`
 
 ## 📚 Documentation
 
-- **[SETUP.md](SETUP.md)**: Complete setup and deployment guide
-- **[CRUSH.md](CRUSH.md)**: Code style guidelines and best practices
-- **AI Lunch-n-Learn Code.js**: Backend script with detailed comments
+### 📖 Guides & References
+- **[📋 SETUP.md](SETUP.md)** - Complete setup and deployment guide
+- **[🎨 CRUSH.md](CRUSH.md)** - Code style guidelines and best practices
+- **[🔧 Backend Code](AI%20Lunch-n-Learn%20Code.js)** - Google Apps Script with detailed comments
+
+### 🆘 Need Help?
+- **Issues**: [GitHub Issues](../../issues) - Report bugs or request features
+- **Discussions**: [GitHub Discussions](../../discussions) - Ask questions and get help
+- **Wiki**: [Project Wiki](../../wiki) - Extended documentation and FAQs
 
 ## 🤝 Contributing
 
-This project is designed for educational workshop registration. For modifications:
+We welcome contributions! This project follows standard open-source practices.
 
-1. Follow the code style guidelines in [CRUSH.md](CRUSH.md)
-2. Test all changes thoroughly
-3. Update documentation as needed
-4. Ensure mobile responsiveness is maintained
+### 🚀 How to Contribute
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feature/amazing-feature`
+3. **Follow** code style in [CRUSH.md](CRUSH.md)
+4. **Test** thoroughly - all changes must pass validation
+5. **Commit** with clear messages: `git commit -m 'Add amazing feature'`
+6. **Push** to your branch: `git push origin feature/amazing-feature`
+7. **Open** a Pull Request
 
-## 📞 Support
+### ✅ Contribution Guidelines
+- [ ] Follow the established code style
+- [ ] Test all changes (form validation, email delivery, mobile responsiveness)
+- [ ] Update documentation as needed
+- [ ] Ensure accessibility compliance
+- [ ] Add appropriate comments for complex logic
 
-**Contact**: Gerry Wolfe, AI Consultant  
-**Email**: gwolfe@intificia.com  
-**LinkedIn**: [linkedin.com/in/gerrywolfe](https://linkedin.com/in/gerrywolfe)  
-**Company**: [Intificia.com](https://intificia.com)
+## 📞 Support & Contact
 
-## 📄 License
+### 👤 Primary Contact
+**Gerry Wolfe** - AI Consultant
+- **Email**: gwolfe@intificia.com
+- **LinkedIn**: [linkedin.com/in/gerrywolfe](https://linkedin.com/in/gerrywolfe)
+- **Company**: [Intificia.com](https://intificia.com)
 
-This project is designed for educational workshop registration purposes. Please ensure compliance with Google Apps Script and GitHub Pages terms of service.
+### 🆘 Getting Help
+- **🐛 Bug Reports**: [Create an Issue](../../issues/new?template=bug_report.md)
+- **💡 Feature Requests**: [Create an Issue](../../issues/new?template=feature_request.md)
+- **❓ Questions**: [GitHub Discussions](../../discussions)
 
-## 🔄 Version History
+### 📧 Response Times
+- **Critical Issues**: Within 24 hours
+- **General Questions**: Within 2-3 business days
+- **Feature Requests**: Reviewed weekly
 
-- **v1.0**: Initial release with complete registration system
-- Includes form, backend processing, email automation, and reminder system
+## 📄 License & Credits
+
+### 📋 License
+This project is designed for educational workshop registration purposes. Please ensure compliance with:
+- Google Apps Script Terms of Service
+- GitHub Pages Terms of Service
+- Gmail API Usage Policies
+
+### 🏆 Credits
+**Built with ❤️ for the Bismarck Chamber of Commerce AI Lunch-n-Learn Workshop Series**
+
+### 🔄 Version History
+- **v1.0.0** - Initial release with complete registration system
+  - Full form validation and mobile responsiveness
+  - Automated email system with calendar invites
+  - Smart reminder system (10-day, 3-day, same-day)
+  - Google Sheets integration and data management
 
 ---
 
-**Built with ❤️ for the Bismarck Chamber of Commerce AI Lunch-n-Learn Workshop Series**
+<div align="center">
+  <p><strong>Questions? Issues? Ideas?</strong> We'd love to hear from you!</p>
+  <p>🚀 <a href="../../issues">Open an Issue</a> • 💬 <a href="../../discussions">Start a Discussion</a> • 📧 <a href="mailto:gwolfe@intificia.com">Email Support</a></p>
+</div>

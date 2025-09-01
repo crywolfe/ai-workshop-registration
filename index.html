@@ -28,57 +28,157 @@
 </head>
 <body class="bg-intificia-bg font-poppins">
     <!-- Header -->
-    <header class="bg-intificia-dark-blue text-white py-6">
+    <header class="bg-intificia-dark-blue text-white py-6" role="banner">
         <div class="container mx-auto px-4 max-w-4xl">
-            <h1 class="text-3xl font-bold">AI Lunch-n-Learn Workshop</h1>
-            <p class="text-lg mt-2">Bismarck Chamber of Commerce</p>
+            <h1 class="text-3xl font-bold" id="main-heading">AI Lunch-n-Learn Workshop</h1>
+            <p class="text-lg mt-2" aria-describedby="main-heading">Bismarck Chamber of Commerce</p>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8 max-w-4xl">
+    <main class="container mx-auto px-4 py-8 max-w-4xl" role="main">
         <!-- Workshop Description Section -->
-        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 class="text-2xl font-semibold text-intificia-dark-blue mb-4">"Unlocking AI: It's More Than Just Advanced Search – Practical Tools for Your Business"</h2>
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8" aria-labelledby="workshop-title">
+            <h2 class="text-2xl font-semibold text-intificia-dark-blue mb-4" id="workshop-title">"Unlocking AI: It's More Than Just Advanced Search – Practical Tools for Your Business"</h2>
             <p class="text-intificia-text mb-4">
-                Join us for a free 35-minute Lunch-n-Learn workshop led by AI Consultant Gerry Wolfe from <a href="https://intificia.com" target="_blank" class="text-intificia-dark-blue hover:text-intificia-accent transition">Intificia.com</a>. Discover how artificial intelligence can transform your business operations beyond advanced web searches.
+                Join us for a free 35-minute Lunch-n-Learn workshop led by AI Consultant Gerry Wolfe from <a href="https://intificia.com" target="_blank" rel="noopener noreferrer" class="text-intificia-dark-blue hover:text-intificia-accent transition" aria-label="Visit Intificia.com (opens in new tab)">Intificia.com</a>. Discover how artificial intelligence can transform your business operations beyond advanced web searches.
             </p>
-            <p class="text-intificia-text mb-4">
-                <strong>Date & Time:</strong> October 15, 2025, 12:00 PM - 12:35 PM (CDT)<br>
-                <strong>Location:</strong> Bismarck Chamber of Commerce (Mandan Room)<br>
-                <strong>Duration:</strong> 35 minutes<br>
-                <strong>Cost:</strong> Free<br>
-                <strong>What to Bring:</strong> Lunch and a notebook
-            </p>
+            <div class="text-intificia-text mb-4">
+                <dl class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    <div>
+                        <dt class="font-semibold">Date & Time:</dt>
+                        <dd>October 15, 2025, 12:00 PM - 12:35 PM (CDT)</dd>
+                    </div>
+                    <div>
+                        <dt class="font-semibold">Location:</dt>
+                        <dd>Bismarck Chamber of Commerce (Mandan Room)</dd>
+                    </div>
+                    <div>
+                        <dt class="font-semibold">Duration:</dt>
+                        <dd>35 minutes</dd>
+                    </div>
+                    <div>
+                        <dt class="font-semibold">Cost:</dt>
+                        <dd>Free</dd>
+                    </div>
+                    <div class="md:col-span-2">
+                        <dt class="font-semibold">What to Bring:</dt>
+                        <dd>Lunch and a notebook</dd>
+                    </div>
+                </dl>
+            </div>
             <p class="text-intificia-text">
                 This workshop is strictly educational with no sales pitches. Learn practical, actionable ways to implement AI tools safely and effectively in your business.
             </p>
         </section>
 
         <!-- Registration Form Section -->
-        <section class="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 class="text-2xl font-semibold text-intificia-dark-green mb-4">Register Now</h2>
-            <p class="text-intificia-text mb-4">Space is limited. Please fill out the form below to secure your spot.</p>
-            <form id="registration-form" action="https://script.google.com/macros/s/AKfycbyJlH6n93qHG5o9Ymu7WkiUFyQPkVwcFtchbp1Um_gHLNNPM0om2PiHPhK7dzla8wJG/exec" method="POST" class="space-y-4">
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8" aria-labelledby="registration-heading">
+            <h2 class="text-2xl font-semibold text-intificia-dark-blue mb-4" id="registration-heading">Register Now</h2>
+            <p class="text-intificia-text mb-6">Space is limited. Please fill out the form below to secure your spot.</p>
+
+            <!-- Status Messages -->
+            <div id="form-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+            <form id="registration-form" action="https://script.google.com/macros/s/AKfycbyJlH6n93qHG5o9Ymu7WkiUFyQPkVwcFtchbp1Um_gHLNNPM0om2PiHPhK7dzla8wJG/exec" method="POST" novalidate class="space-y-6" aria-describedby="form-description">
+                <p id="form-description" class="sr-only">Registration form for AI Lunch-n-Learn Workshop. All fields marked with asterisk are required.</p>
+
+                <!-- Full Name Field -->
                 <div>
-                    <label for="name" class="block text-sm font-medium text-intificia-text">Full Name</label>
-                    <input type="text" id="name" name="Name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-accent focus:ring focus:ring-intificia-accent focus:ring-opacity-50 text-intificia-text" placeholder="Your name">
+                    <label for="name" class="block text-sm font-medium text-intificia-text mb-2">
+                        Full Name <span class="text-red-500" aria-label="required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="Name"
+                        required
+                        aria-describedby="name-error"
+                        aria-invalid="false"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-accent focus:ring focus:ring-intificia-accent focus:ring-opacity-50 text-intificia-text transition-colors"
+                        placeholder="Enter your full name"
+                        maxlength="100"
+                    >
+                    <div id="name-error" class="text-red-500 text-sm mt-1 hidden" role="alert" aria-live="polite"></div>
                 </div>
+
+                <!-- Email Address Field -->
                 <div>
-                    <label for="email" class="block text-sm font-medium text-intificia-text">Email Address</label>
-                    <input type="email" id="email" name="Email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-accent focus:ring focus:ring-intificia-accent focus:ring-opacity-50 text-intificia-text" placeholder="your.email@example.com">
+                    <label for="email" class="block text-sm font-medium text-intificia-text mb-2">
+                        Email Address <span class="text-red-500" aria-label="required">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="Email"
+                        required
+                        aria-describedby="email-error"
+                        aria-invalid="false"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-accent focus:ring focus:ring-intificia-accent focus:ring-opacity-50 text-intificia-text transition-colors"
+                        placeholder="your.email@example.com"
+                        maxlength="255"
+                    >
+                    <div id="email-error" class="text-red-500 text-sm mt-1 hidden" role="alert" aria-live="polite"></div>
                 </div>
+
+                <!-- Business Name Field -->
                 <div>
-                    <label for="business" class="block text-sm font-medium text-intificia-text">Business Name (Optional)</label>
-                    <input type="text" id="business" name="Business" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-accent focus:ring focus:ring-intificia-accent focus:ring-opacity-50 text-intificia-text" placeholder="Your business name">
+                    <label for="business" class="block text-sm font-medium text-intificia-text mb-2">
+                        Business Name <span class="text-gray-400">(Optional)</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="business"
+                        name="Business"
+                        aria-describedby="business-hint"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-accent focus:ring focus:ring-intificia-accent focus:ring-opacity-50 text-intificia-text transition-colors"
+                        placeholder="Your business or organization name"
+                        maxlength="100"
+                    >
+                    <div id="business-hint" class="text-gray-500 text-sm mt-1">Optional: Help us understand your business context</div>
                 </div>
+
+                <!-- AI Interests Field -->
                 <div>
-                    <label for="interests" class="block text-sm font-medium text-intificia-text">What AI topics are you interested in?</label>
-                    <textarea id="interests" name="Interests" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-accent focus:ring focus:ring-intificia-accent focus:ring-opacity-50 text-intificia-text" placeholder="e.g., AI for marketing, customer service automation"></textarea>
+                    <label for="interests" class="block text-sm font-medium text-intificia-text mb-2">
+                        AI Topics of Interest <span class="text-gray-400">(Optional)</span>
+                    </label>
+                    <textarea
+                        id="interests"
+                        name="Interests"
+                        rows="4"
+                        aria-describedby="interests-hint"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-intificia-accent focus:ring focus:ring-intificia-accent focus:ring-opacity-50 text-intificia-text transition-colors resize-vertical"
+                        placeholder="e.g., AI for marketing, customer service automation, data analysis"
+                        maxlength="500"
+                    ></textarea>
+                    <div id="interests-hint" class="text-gray-500 text-sm mt-1">Optional: Help us tailor the workshop to your interests (max 500 characters)</div>
+                    <div id="interests-count" class="text-gray-400 text-xs mt-1 text-right">0 / 500</div>
                 </div>
-                <button type="submit" class="bg-intificia-accent text-intificia-white font-semibold px-4 py-2 rounded-md hover:bg-opacity-90 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-intificia-accent">Register</button>
+
+                <!-- Submit Button -->
+                <div class="pt-4">
+                    <button
+                        type="submit"
+                        id="submit-button"
+                        class="w-full bg-intificia-accent text-intificia-white font-semibold px-6 py-3 rounded-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-intificia-accent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                        aria-describedby="submit-status"
+                    >
+                        <span id="button-text">Register for Workshop</span>
+                        <span id="button-loading" class="hidden">
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Registering...
+                        </span>
+                    </button>
+                    <div id="submit-status" class="sr-only" aria-live="polite"></div>
+                </div>
             </form>
-            <p id="form-message" class="mt-4 text-intificia-text"></p>
+
+            <!-- Success/Error Messages -->
+            <div id="form-message" class="mt-6 p-4 rounded-md hidden" role="alert" aria-live="assertive" aria-atomic="true"></div>
         </section>
 
         <!-- About Section -->
@@ -110,42 +210,279 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Form Submission -->
+    <!-- Enhanced JavaScript for Form Handling -->
     <script>
-        document.getElementById('registration-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            const messageElement = document.getElementById('form-message');
-            const submitButton = form.querySelector('button[type="submit"]');
+        'use strict';
 
-            messageElement.textContent = 'Submitting...';
-            messageElement.className = 'mt-4 text-intificia-text';
-            submitButton.disabled = true;
+        // Form handling class for better organization
+        class RegistrationForm {
+            constructor() {
+                this.form = document.getElementById('registration-form');
+                this.submitButton = document.getElementById('submit-button');
+                this.buttonText = document.getElementById('button-text');
+                this.buttonLoading = document.getElementById('button-loading');
+                this.messageElement = document.getElementById('form-message');
+                this.formStatus = document.getElementById('form-status');
+                this.interestsTextarea = document.getElementById('interests');
+                this.interestsCount = document.getElementById('interests-count');
 
-            fetch(form.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result === 'success') {
-                    messageElement.textContent = `Thank you, ${formData.get('Name')}! Your registration is confirmed. A confirmation email with a calendar invite has been sent to ${formData.get('Email')}.`;
-                    messageElement.className = 'mt-4 text-green-600';
-                    form.reset();
-                } else {
-                    messageElement.textContent = 'An error occurred while submitting the form. Please try again. ' + (data.error || '');
-                    messageElement.className = 'mt-4 text-red-600';
+                this.init();
+            }
+
+            init() {
+                // Set up form submission
+                this.form.addEventListener('submit', this.handleSubmit.bind(this));
+
+                // Set up real-time validation
+                this.setupValidation();
+
+                // Set up character counting for textarea
+                this.setupCharacterCounting();
+
+                // Set up keyboard navigation
+                this.setupKeyboardNavigation();
+            }
+
+            setupValidation() {
+                const inputs = this.form.querySelectorAll('input[required], textarea[required]');
+
+                inputs.forEach(input => {
+                    input.addEventListener('blur', () => this.validateField(input));
+                    input.addEventListener('input', () => this.clearFieldError(input));
+                });
+            }
+
+            setupCharacterCounting() {
+                if (this.interestsTextarea && this.interestsCount) {
+                    this.interestsTextarea.addEventListener('input', () => {
+                        const count = this.interestsTextarea.value.length;
+                        const max = this.interestsTextarea.getAttribute('maxlength');
+                        this.interestsCount.textContent = `${count} / ${max}`;
+
+                        // Update color based on remaining characters
+                        if (count > max * 0.9) {
+                            this.interestsCount.className = 'text-red-500 text-xs mt-1 text-right';
+                        } else if (count > max * 0.8) {
+                            this.interestsCount.className = 'text-yellow-600 text-xs mt-1 text-right';
+                        } else {
+                            this.interestsCount.className = 'text-gray-400 text-xs mt-1 text-right';
+                        }
+                    });
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                messageElement.textContent = 'A network error occurred. Please check your connection and try again.';
-                messageElement.className = 'mt-4 text-red-600';
-            })
-            .finally(() => {
-                submitButton.disabled = false;
-            });
+            }
+
+            setupKeyboardNavigation() {
+                // Enhanced keyboard navigation
+                const focusableElements = this.form.querySelectorAll(
+                    'input, textarea, button'
+                );
+
+                focusableElements.forEach((element, index) => {
+                    element.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' && element.tagName !== 'TEXTAREA') {
+                            e.preventDefault();
+                            const nextIndex = (index + 1) % focusableElements.length;
+                            focusableElements[nextIndex].focus();
+                        }
+                    });
+                });
+            }
+
+            validateField(field) {
+                const errorElement = document.getElementById(field.id + '-error');
+                const value = field.value.trim();
+
+                // Clear previous error
+                this.clearFieldError(field);
+
+                // Check if field is empty
+                if (field.hasAttribute('required') && !value) {
+                    this.showFieldError(field, 'This field is required');
+                    return false;
+                }
+
+                // Email validation
+                if (field.type === 'email' && value) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value)) {
+                        this.showFieldError(field, 'Please enter a valid email address');
+                        return false;
+                    }
+                }
+
+                // Length validation
+                if (field.hasAttribute('maxlength')) {
+                    const maxLength = parseInt(field.getAttribute('maxlength'));
+                    if (value.length > maxLength) {
+                        this.showFieldError(field, `Maximum ${maxLength} characters allowed`);
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            showFieldError(field, message) {
+                const errorElement = document.getElementById(field.id + '-error');
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.classList.remove('hidden');
+                    field.setAttribute('aria-invalid', 'true');
+                    field.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                }
+            }
+
+            clearFieldError(field) {
+                const errorElement = document.getElementById(field.id + '-error');
+                if (errorElement) {
+                    errorElement.classList.add('hidden');
+                    errorElement.textContent = '';
+                    field.setAttribute('aria-invalid', 'false');
+                    field.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                }
+            }
+
+            validateForm() {
+                const requiredFields = this.form.querySelectorAll('input[required], textarea[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!this.validateField(field)) {
+                        isValid = false;
+                    }
+                });
+
+                return isValid;
+            }
+
+            setLoadingState(loading) {
+                this.submitButton.disabled = loading;
+
+                if (loading) {
+                    this.buttonText.classList.add('hidden');
+                    this.buttonLoading.classList.remove('hidden');
+                    this.formStatus.textContent = 'Submitting registration form...';
+                } else {
+                    this.buttonText.classList.remove('hidden');
+                    this.buttonLoading.classList.add('hidden');
+                    this.formStatus.textContent = '';
+                }
+            }
+
+            showMessage(message, type = 'success') {
+                const classes = {
+                    success: 'bg-green-50 border-green-200 text-green-800',
+                    error: 'bg-red-50 border-red-200 text-red-800',
+                    info: 'bg-blue-50 border-blue-200 text-blue-800'
+                };
+
+                this.messageElement.textContent = message;
+                this.messageElement.className = `mt-6 p-4 rounded-md border ${classes[type]} hidden`;
+                this.messageElement.classList.remove('hidden');
+
+                // Update ARIA live region
+                this.formStatus.textContent = message;
+
+                // Auto-hide success messages after 10 seconds
+                if (type === 'success') {
+                    setTimeout(() => {
+                        this.messageElement.classList.add('hidden');
+                    }, 10000);
+                }
+            }
+
+            async handleSubmit(event) {
+                event.preventDefault();
+
+                // Validate form
+                if (!this.validateForm()) {
+                    this.showMessage('Please correct the errors above and try again.', 'error');
+                    // Focus first invalid field
+                    const firstInvalid = this.form.querySelector('[aria-invalid="true"]');
+                    if (firstInvalid) {
+                        firstInvalid.focus();
+                    }
+                    return;
+                }
+
+                const formData = new FormData(this.form);
+
+                // Set loading state
+                this.setLoadingState(true);
+
+                try {
+                    const response = await fetch(this.form.action, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+
+                    if (data.result === 'success') {
+                        this.showMessage(
+                            `Thank you, ${formData.get('Name')}! Your registration is confirmed. A confirmation email with a calendar invite has been sent to ${formData.get('Email')}.`,
+                            'success'
+                        );
+                        this.form.reset();
+
+                        // Reset character count
+                        if (this.interestsCount) {
+                            this.interestsCount.textContent = '0 / 500';
+                            this.interestsCount.className = 'text-gray-400 text-xs mt-1 text-right';
+                        }
+
+                        // Clear any remaining errors
+                        const errorElements = this.form.querySelectorAll('[aria-invalid="true"]');
+                        errorElements.forEach(field => this.clearFieldError(field));
+
+                        // Scroll to success message
+                        this.messageElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                    } else {
+                        throw new Error(data.error || 'An error occurred while submitting the form');
+                    }
+
+                } catch (error) {
+                    console.error('Form submission error:', error);
+
+                    let errorMessage = 'An error occurred while submitting the form. Please try again.';
+
+                    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                        errorMessage = 'Network error. Please check your internet connection and try again.';
+                    } else if (error.message.includes('HTTP error')) {
+                        errorMessage = 'Server error. Please try again in a few moments.';
+                    } else if (error.message) {
+                        errorMessage = error.message;
+                    }
+
+                    this.showMessage(errorMessage, 'error');
+                } finally {
+                    this.setLoadingState(false);
+                }
+            }
+        }
+
+        // Initialize form when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            new RegistrationForm();
+        });
+
+        // Handle browser back/forward navigation
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                // Page was restored from cache, reset form state
+                const form = document.getElementById('registration-form');
+                const messageElement = document.getElementById('form-message');
+                const submitButton = document.getElementById('submit-button');
+
+                if (form) form.reset();
+                if (messageElement) messageElement.classList.add('hidden');
+                if (submitButton) submitButton.disabled = false;
+            }
         });
     </script>
 </body>

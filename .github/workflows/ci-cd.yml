@@ -1,0 +1,45 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Basic HTML check
+      run: |
+        # Simple validation - ensure HTML file exists and has basic structure
+        if [ ! -f "index.html" ]; then
+          echo "❌ index.html not found"
+          exit 1
+        fi
+
+        # Check for basic HTML structure
+        if ! grep -q "<!DOCTYPE html>" index.html; then
+          echo "⚠️  Missing DOCTYPE declaration"
+        fi
+
+        # Check file size (should be reasonable)
+        FILE_SIZE=$(stat -c%s index.html)
+        if [ $FILE_SIZE -gt 5242880 ]; then
+          echo "⚠️  HTML file is quite large ($FILE_SIZE bytes)"
+        fi
+
+        echo "✅ Basic HTML validation passed"
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
+        cname: false
+        allow_empty_commit: false

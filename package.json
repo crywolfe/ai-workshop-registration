@@ -1,0 +1,33 @@
+{
+  "name": "intificia-lunch-n-learn",
+  "version": "1.0.0",
+  "description": "AI Lunch-n-Learn Workshop Registration System - A complete workshop registration system with responsive web form and automated backend processing",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "serve": "python -m http.server 8080",
+    "preview": "open index.html",
+    "clean": "echo 'Nothing to clean - this is a static site!'"
+  },
+  "keywords": [
+    "workshop",
+    "registration",
+    "ai",
+    "google-apps-script",
+    "tailwind-css",
+    "responsive",
+    "form-validation",
+    "email-automation"
+  ],
+  "author": "Gerry Wolfe <gwolfe@intificia.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/intificia-lunch-n-learn.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/intificia-lunch-n-learn/issues"
+  },
+  "homepage": "https://yourusername.github.io/intificia-lunch-n-learn/",
+
+}
